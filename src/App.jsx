@@ -11,11 +11,10 @@ const App = () => {
     }
 
 
-
-
     return (
         <>
-            <Users />
+            <SearchStatus length={users.length}/>
+            <Users users={users}/>
         </>
     )
 
