@@ -10,6 +10,13 @@ const App = () => {
         setUsers(users.filter(user => user._id !== userId))
     }
 
+    const handleToggleBookMark = (id) => {
+         return users.map(mark => {
+             if (mark._id === id) {
+                 mark.bookmark = !mark.bookmark
+             }
+         })
+    }
 
     return (
         <>
@@ -17,6 +24,7 @@ const App = () => {
             <Users
                 users={users}
                 onDelete = {handleDelete}
+                onToggle={handleToggleBookMark}
             />
         </>
     )
