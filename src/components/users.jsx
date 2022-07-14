@@ -16,7 +16,10 @@ const Users = ({users, ...rest}) => {
                         <th scope="col">Избранное</th>
                     </tr>
                     </thead>
-                    <tbody><User users={users} onClick={rest.onDelete} important={rest.onToggle}/></tbody>
+                    <tbody>{users.map(user => (
+                        <User key={user._id} users={user} onClick={rest.onDelete} important={rest.onToggle} id={user._id}/>
+                    ))}
+                    </tbody>
                 </table>
         </>
     )

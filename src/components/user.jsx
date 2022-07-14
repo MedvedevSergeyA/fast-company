@@ -8,20 +8,21 @@ const User = ({users, ...rest}) => {
 
     return (
         <>
-            {users.map((user) => (
-                <tr key={user._id}>
-                    <td>{user.name}</td>
-                    <td>{user.qualities.map(item =>
-                        <Qualities name={item.name} color={item.color} _id={item._id}/>
+
+                <tr>
+                    <td>{users.name}</td>
+                    <td>{users.qualities.map(item =>
+                        <Qualities key = {item._id} name={item.name} color={item.color} _id={item._id}/>
                     )}
                     </td>
-                    <td>{user.profession.name}</td>
-                    <td>{user.completedMeetings}</td>
-                    <td>{user.rate}/5</td>
-                    <td>{<BookMark status={user.bookmark} setToggle={rest.important}/>}</td>
-                    <td><button className={'btn btn-danger'} onClick={() => rest.onClick(user._id)}>Удалить</button></td>
+                    <td>{users.profession.name}</td>
+                    <td>{users.completedMeetings}</td>
+                    <td>{users.rate}/5</td>
+                    <td>{<BookMark status={users.bookmark} setToggle={rest.important} usId={rest.id}/>}</td>
+                    <td><button className={'btn btn-danger'} onClick={() => rest.onClick(users._id)}>Удалить</button></td>
                 </tr>
-            ))}
+
+
         </>
     );
 };

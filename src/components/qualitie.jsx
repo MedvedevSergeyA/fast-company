@@ -4,7 +4,7 @@ const Qualities = ({color, name, _id}) => {
 
     return (
         <>
-            <span key={_id} className={`badge bg-${color} m-1`}>{name}</span>
+            <span className={`badge bg-${color} m-1`}>{name}</span>
         </>
     );
 };

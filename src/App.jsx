@@ -11,12 +11,15 @@ const App = () => {
     }
 
     const handleToggleBookMark = (id) => {
-         return users.map(mark => {
-             if (mark._id === id) {
-                 mark.bookmark = !mark.bookmark
-             }
-         })
+        setUsers(users.map(mark => {
+            if (mark._id === id) {
+                return {...mark, bookmark: !mark.bookmark}
+            } else {
+                return mark
+            }
+        }))
     }
+
 
     return (
         <>
