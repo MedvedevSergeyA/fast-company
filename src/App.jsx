@@ -14,7 +14,10 @@ const App = () => {
     return (
         <>
             <SearchStatus length={users.length}/>
-            <Users users={users}/>
+            <Users
+                users={users}
+                onDelete = {handleDelete}
+            />
         </>
     )
 
