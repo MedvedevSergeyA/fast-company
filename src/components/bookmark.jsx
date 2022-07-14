@@ -7,7 +7,7 @@ const Bookmark = ({status, ...rest}) => {
 
         if (status === false) {
             return (
-                <button onClick={() => rest.setToggle(status._id)}>
+                <button onClick={() => rest.setToggle(rest._id)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                          className="bi bi-bookmark" viewBox="0 0 16 16">
                         <path
@@ -17,7 +17,7 @@ const Bookmark = ({status, ...rest}) => {
             )
         } else {
             return (
-                <button onClick={() => rest.setToggle(status._id)}>
+                <button onClick={() => rest.setToggle(rest._id)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                          className="bi bi-bookmark-fill" viewBox="0 0 16 16">
                         <path
