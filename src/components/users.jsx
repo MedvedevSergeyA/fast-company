@@ -9,7 +9,6 @@ import SearchStatus from "./searchStatus";
 
 
 const Users = ({ users, ...rest }) => {
-    console.log(users)
     const [professions, setProfessions] = useState();
     const pageSize = 2;
     const [currentPage, setCurrentPage] = useState(1);

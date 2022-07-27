@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Users from "./components/users";
-import api from "./API/index";
+import api from "./API";
 
 const App = () => {
-    const [users, setUsers] = useState();
-    console.log(users)
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        api.users.fetchAll().then((user) => setUsers(
-            user
-        ))
+        api.users.fetchAll().then((user) => setUsers(user))
     }, []);
 
     const handleDelete = (userId) => {
