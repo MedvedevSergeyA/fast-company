@@ -45,7 +45,7 @@ const User = ({ users, ...rest }) => {
 };
 
 User.propTypes = {
-    users: PropTypes.array.isRequired
+    users: PropTypes.object.isRequired
 };
 
 
