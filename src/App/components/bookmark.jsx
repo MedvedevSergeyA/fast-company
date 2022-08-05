@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Bookmark = ({ status, setToggle, usId }) => {
+const Bookmark = ({ status, ...rest }) => {
     if (status === false) {
         return (
-            <button onClick={() => setToggle(usId)}>
+            <button {...rest}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -19,7 +19,7 @@ const Bookmark = ({ status, setToggle, usId }) => {
         );
     } else {
         return (
-            <button onClick={() => setToggle(usId)}>
+            <button {...rest}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -36,9 +36,7 @@ const Bookmark = ({ status, setToggle, usId }) => {
 };
 
 Bookmark.propTypes = {
-    status: PropTypes.bool.isRequired,
-    setToggle: PropTypes.func.isRequired,
-    usId: PropTypes.string.isRequired
+    status: PropTypes.bool.isRequired
 };
 
 export default Bookmark;

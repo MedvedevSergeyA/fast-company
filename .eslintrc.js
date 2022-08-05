@@ -15,8 +15,12 @@ module.exports = {
     rules: {
         indent: ["error", 4],
         semi: 0,
-        "space-before-function-paren": ["error", {anonymous: "always", named:"never"}],
+        "space-before-function-paren": [
+            "error",
+            { anonymous: "always", named: "never" }
+        ],
         quotes: ["error", "double", { allowTemplateLiterals: true }],
-        "no-multiple-empty-lines": [2, {"max": 99999, "maxEOF": 0}],
+        "no-multiple-empty-lines": [2, { max: 99999, maxEOF: 0 }],
+        "multiline-ternary": ["off"]
     }
 };
