@@ -7,6 +7,7 @@ import API from "../API";
 import SearchStatus from "./searchStatus";
 import UsersTable from "./UsersTable";
 import _ from "lodash";
+import Loader from "./loader/loader";
 
 const Users = () => {
     const [professions, setProfessions] = useState();
@@ -14,8 +15,8 @@ const Users = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedProf, setSelectedProf] = useState();
     const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
-
     const [users, setUsers] = useState();
+    const [searchUser, setSearchUser] = useState("");
 
     useEffect(() => {
         API.users.fetchAll().then((data) => setUsers(data));
@@ -42,7 +43,12 @@ const Users = () => {
     }, []);
     useEffect(() => {
         setCurrentPage(1);
-    }, [selectedProf]);
+    }, [selectedProf, searchUser]);
+
+    const handleSearch = ({ target }) => {
+        setSelectedProf(undefined);
+        setSearchUser(target.value);
+    };
 
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
@@ -51,6 +57,7 @@ const Users = () => {
     const handleProfessionSelect = (item) => {
         setSelectedProf(item);
     };
+
     const handleSort = (item) => {
         setSortBy(item);
     };
@@ -61,6 +68,10 @@ const Users = () => {
                   (user) =>
                       JSON.stringify(user.profession) ===
                       JSON.stringify(selectedProf)
+              )
+            : users
+            ? users.filter((user) =>
+                  user.name.toLowerCase().includes(searchUser.toLowerCase())
               )
             : users;
         const count = filteredUsers.length;
@@ -87,12 +98,19 @@ const Users = () => {
                             className="btn btn-secondary mt-2"
                             onClick={clearFilter}
                         >
-                            Очистить
+                            Все пользователи
                         </button>
                     </div>
                 )}
                 <div className="d-flex flex-column">
                     <SearchStatus length={count} />
+                    <input
+                        type="text"
+                        name="searchQuery"
+                        placeholder="Search..."
+                        value={searchUser}
+                        onChange={handleSearch}
+                    />
                     {count > 0 && (
                         <UsersTable
                             users={userCrop}
@@ -114,7 +132,17 @@ const Users = () => {
             </div>
         );
     }
-    return "loading";
+    return (
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: 200
+            }}
+        >
+            <Loader />
+        </div>
+    );
 };
 
 Users.propTypes = {

@@ -8,15 +8,17 @@ import Loader from "./loader/loader";
 const UserPage = ({ userId }) => {
     const history = useHistory();
     const [user, setUser] = useState();
+
+
     useEffect(() => {
         API.users.getById(userId).then((data) => {
             setUser(data);
         });
     }, []);
+
     const handleBackToUserList = () => {
         history.push("/users");
     };
-    console.log(user);
 
     return (
         <>

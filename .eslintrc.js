@@ -21,6 +21,6 @@ module.exports = {
         ],
         quotes: ["error", "double", { allowTemplateLiterals: true }],
         "no-multiple-empty-lines": [2, { max: 99999, maxEOF: 0 }],
-        "multiline-ternary": ["off"]
+        "multiline-ternary": ["off"],
     }
 };
