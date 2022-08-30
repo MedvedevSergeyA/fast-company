@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import API from "../API";
+import API from "../../../API";
 import { useHistory } from "react-router-dom";
-import QualitiesList from "./qualitiesList";
-import Loader from "./loader/loader";
+import QualitiesList from "../../ui/qualities/qualitiesList";
+import Loader from "../../loader/loader";
 
 const UserPage = ({ userId }) => {
     const history = useHistory();
     const [user, setUser] = useState();
-
-
     useEffect(() => {
         API.users.getById(userId).then((data) => {
             setUser(data);
@@ -17,7 +15,7 @@ const UserPage = ({ userId }) => {
     }, []);
 
     const handleBackToUserList = () => {
-        history.push("/users");
+        history.push(history.location.pathname + "/edit");
     };
 
     return (
@@ -42,7 +40,7 @@ const UserPage = ({ userId }) => {
                                 handleBackToUserList();
                             }}
                         >
-                            Назад
+                            Изменить
                         </button>
                     </div>
                 </div>
