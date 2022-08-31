@@ -13,4 +13,7 @@
 </div>
 </div>
 
+<Icon24LogoVk width={20} height={20} />
+
+
  
