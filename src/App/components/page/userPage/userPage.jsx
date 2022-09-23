@@ -24,39 +24,21 @@ const UserPage = ({ userId }) => {
     return (
         <>
             {user ? (
-                // <div className="container">
-                //     <div className="d-flex flex-column align-items-center text-center position-relative">
-                //         <h1>User Information</h1>
-                //         <h2>Name: {user.name}</h2>
-                //         <span>
-                //             Completed Meetings: {user.completedMeetings}
-                //         </span>
-                //         <span>Rate: {user.rate}</span>
-                //         <span>Profession: {user.profession.name}</span>
-                //         <span>
-                //             Qualities:
-                //             <QualitiesList qualities={user.qualities} />
-                //         </span>
-                //         <button
-                //             className="btn btn-primary"
-                //             onClick={() => {
-                //                 handleBackToUserList();
-                //             }}
-                //         >
-                //             Изменить
-                //         </button>
-                //     </div>
-                // </div>
                 <div className="container">
                     <div className="row gutters-sm">
                         <div className="col-md-4 mb-3">
-                            <button className='btn btn-primary mb-3' onClick={handleBackToUserList}>Назад</button>
-                            <UserCard user={user}/>
-                            <QualitiesCard user={user}/>
-                            <MeetingsCard user={user}/>
+                            <button
+                                className="btn btn-primary mb-3"
+                                onClick={handleBackToUserList}
+                            >
+                                Назад
+                            </button>
+                            <UserCard user={user} />
+                            <QualitiesCard user={user} />
+                            <MeetingsCard user={user} />
                         </div>
                         <div className="col-md-8">
-                            <CommentsComponent/>
+                            <CommentsComponent />
                         </div>
                     </div>
                 </div>
