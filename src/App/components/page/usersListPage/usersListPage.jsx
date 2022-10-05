@@ -14,9 +14,9 @@ const UsersListPage = () => {
     const [professions, setProfessions] = useState();
     const pageSize = 8;
     const [currentPage, setCurrentPage] = useState(1);
+    const [searchQuery, setSearchQuery] = useState("");
     const [selectedProf, setSelectedProf] = useState();
     const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
-    const [searchUser, setSearchUser] = useState("");
     const { users } = useUser();
 
     console.log(users);
@@ -42,11 +42,11 @@ const UsersListPage = () => {
     }, []);
     useEffect(() => {
         setCurrentPage(1);
-    }, [selectedProf, searchUser]);
+    }, [selectedProf, searchQuery]);
 
-    const handleSearch = ({ target }) => {
+    const handleSearchQuery = ({ target }) => {
         setSelectedProf(undefined);
-        setSearchUser(target.value);
+        setSearchQuery(target.value);
     };
 
     const handlePageChange = (pageIndex) => {
@@ -62,15 +62,18 @@ const UsersListPage = () => {
     };
 
     if (users) {
-        const filteredUsers = selectedProf
+        const filteredUsers = searchQuery
+            ? users.filter(
+                  (user) =>
+                      user.name
+                          .toLowerCase()
+                          .indexOf(searchQuery.toLowerCase()) !== -1
+              )
+            : selectedProf
             ? users.filter(
                   (user) =>
                       JSON.stringify(user.profession) ===
                       JSON.stringify(selectedProf)
-              )
-            : users
-            ? users.filter((user) =>
-                  user.name.toLowerCase().includes(searchUser.toLowerCase())
               )
             : users;
         const count = filteredUsers.length;
@@ -107,8 +110,8 @@ const UsersListPage = () => {
                         type="text"
                         name="searchQuery"
                         placeholder="Search..."
-                        value={searchUser}
-                        onChange={handleSearch}
+                        value={searchQuery}
+                        onChange={handleSearchQuery}
                     />
                     {count > 0 && (
                         <UsersTable
