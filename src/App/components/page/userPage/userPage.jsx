@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import API from "../../../API";
 import { useHistory } from "react-router-dom";
 import Loader from "../../loader/loader";
 import UserCard from "../../ui/UserCard";
 import QualitiesCard from "../../ui/QualitiesCard";
 import MeetingsCard from "../../ui/MeetingsCard";
 import CommentsComponent from "../../ui/CommentsComponent";
+import { useUser } from "../../../hooks/useUsers";
+import { CommentsProvider } from "../../../hooks/useComments";
 
 const UserPage = ({ userId }) => {
     const history = useHistory();
-    const [user, setUser] = useState();
-    useEffect(() => {
-        API.users.getById(userId).then((data) => {
-            setUser(data);
-        });
-    }, []);
-
+    const { getUserById } = useUser();
+    const user = getUserById(userId);
     const handleBackToUserList = () => {
         history.push("/users");
     };
@@ -38,7 +34,9 @@ const UserPage = ({ userId }) => {
                             <MeetingsCard user={user} />
                         </div>
                         <div className="col-md-8">
-                            <CommentsComponent />
+                            <CommentsProvider>
+                                <CommentsComponent />
+                            </CommentsProvider>
                         </div>
                     </div>
                 </div>
