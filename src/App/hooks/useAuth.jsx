@@ -4,10 +4,10 @@ import axios from "axios";
 import userService from "../services/user.service";
 import { toast } from "react-toastify";
 import localStorageService, {
+    getAccessToken,
     setToken
 } from "../services/localStorage.service";
 import { useHistory } from "react-router-dom";
-
 export const httpAuth = axios.create({
     baseURL: "https://identitytoolkit.googleapis.com/v1/",
     params: {
@@ -131,8 +131,37 @@ const AuthProvider = ({ children }) => {
             errorCatcher(error);
         }
     }
+    async function upDateUser({ _id, email, password, ...rest }) {
+        try {
+            const { data } = await httpAuth.post("accounts:update", {
+                idToken: getAccessToken(),
+                email,
+                password,
+                returnSecureToken: true
+            });
+            if (data.idToken && data.refreshToken) {
+                setToken(data);
+            }
+            const userData = { _id, email, ...rest };
+            await updateCurrUser(userData);
+        } catch (error) {
+            errorCatcher(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+    async function updateCurrUser(data) {
+        try {
+            const { content } = await userService.updateUser(data);
+            setUser(content);
+        } catch (error) {
+            errorCatcher(error);
+        }
+    }
     return (
-        <AuthContext.Provider value={{ signUp, signIn, currentUser, logOut }}>
+        <AuthContext.Provider
+            value={{ signUp, signIn, currentUser, logOut, upDateUser }}
+        >
             {!isLoading ? children : "Loading"}
         </AuthContext.Provider>
     );

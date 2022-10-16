@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { useAuth } from "./useAuth";
 import { nanoid } from "nanoid";
 import commentService from "../services/comment.service";
@@ -50,9 +50,9 @@ export const CommentsProvider = ({ children }) => {
         try {
             const { content } = await commentService.removeComment(id);
             if (content === null) {
-                setComments((prevState) => {
-                    prevState.filter((c) => c._id !== id);
-                });
+                setComments((prevState) =>
+                    prevState.filter((c) => c._id !== id)
+                );
             }
             console.log(content);
         } catch (error) {
