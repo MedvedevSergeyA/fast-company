@@ -139,9 +139,6 @@ const AuthProvider = ({ children }) => {
                 password,
                 returnSecureToken: true
             });
-            if (data.idToken && data.refreshToken) {
-                setToken(data);
-            }
             const userData = { _id, email, ...rest };
             await updateCurrUser(userData);
         } catch (error) {
