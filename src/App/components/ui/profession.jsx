@@ -5,18 +5,18 @@ import { getProfessionByIds, getProfessionLoadingStatus, loadProfessionList } fr
 
 const Profession = ({ id }) => {
     const dispatch = useDispatch()
-    const prof = useSelector(getProfessionByIds(id))
+
     const isLoading = useSelector(getProfessionLoadingStatus())
 
+    const prof = useSelector(getProfessionByIds(id))
     useEffect(() => {
         dispatch(loadProfessionList())
     }, [])
 
-    if (!isLoading) {
-        return <p>{prof.name}</p>;
-    } else {
-        return "loading...";
-    }
+    if (isLoading) return "Loading"
+    return (
+        <p>{prof.name}</p>
+    )
 };
 
 Profession.propTypes = {

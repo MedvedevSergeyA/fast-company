@@ -23,7 +23,6 @@ const UsersListPage = () => {
     const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
     const { users } = useUser();
 
-    console.log(users);
     const handleDelete = (userId) => {
         // setUsers(users.filter((user) => user._id !== userId));
         console.log(userId);
@@ -37,7 +36,6 @@ const UsersListPage = () => {
                 return user;
             }
         });
-        // setUsers(newArray)
         console.log(newArray);
     };
 

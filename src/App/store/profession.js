@@ -42,7 +42,6 @@ function isOutDated(date) {
 export const loadProfessionList = () => async (dispatch, getState) => {
     const { lastFetch } = getState().profession
     if (isOutDated(lastFetch)) {
-        console.log(lastFetch)
     dispatch(professionRequested())
     try {
         const { content } = await professionService.get();
@@ -59,7 +58,7 @@ export const getProfessionByIds = (professionIds) => (state) => {
     if (state.profession.entities) {
         const professionArray = []
         for (const professionId of professionIds) {
-            for (const profession of state.qualities.entities) {
+            for (const profession of state.profession.entities) {
                 if (profession._id === professionId) {
                     professionArray.push(profession)
                     break
