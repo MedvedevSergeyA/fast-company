@@ -8,13 +8,14 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import { useSelector } from "react-redux";
 import { getQualities, getQualitiesLoadingStatus } from "../../../store/qualities";
-import { getProfession } from "../../../store/profession";
+import { getProfession, getProfessionLoadingStatus } from "../../../store/profession";
 
 const EditUserPage = () => {
     const { currentUser, upDateUser } = useAuth();
     const history = useHistory();
     const [data, setData] = useState(currentUser);
     const professions = useSelector(getProfession())
+    const professionLoading = useSelector(getProfessionLoadingStatus())
     const qualities = useSelector(getQualities())
     const qualitiesLoading = useSelector(getQualitiesLoadingStatus())
 
@@ -37,13 +38,13 @@ const EditUserPage = () => {
         return setQual;
     };
     useEffect(() => {
-        if (!qualitiesLoading) {
-            setData((prev) => ({
-                ...prev,
+        if (!professionLoading && !qualitiesLoading && currentUser && !data) {
+            setData({
+                ...currentUser,
                 qualities: transformData(currentUser.qualities)
-            }));
+            });
         }
-    }, [qualitiesLoading]);
+    }, [professionLoading, qualitiesLoading, currentUser, data]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

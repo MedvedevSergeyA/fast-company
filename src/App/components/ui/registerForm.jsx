@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getQualities } from "../../store/qualities";
 import { getProfession } from "../../store/profession";
+// import { useProfessions } from "../../hooks/useProfession";
 
 const RegisterForm = () => {
     const history = useHistory();
@@ -25,7 +26,9 @@ const RegisterForm = () => {
     const { signUp } = useAuth();
     const [errors, setErrors] = useState({});
     const qualities = useSelector(getQualities())
+    // const { professions } = useProfessions();
     const professions = useSelector(getProfession())
+
     const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,

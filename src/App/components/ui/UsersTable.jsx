@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import BookMark from "../common/bookmark";
-import QualitiesList from "./qualities";
+import Qualities from "./qualities/index";
 import Profession from "./profession";
 import Table from "../common/table/table";
 import { Link } from "react-router-dom";
@@ -17,7 +17,7 @@ const UsersTable = ({ users, onSort, selectedSort, onToggleBookMark }) => {
         },
         qualities: {
             name: "Качества",
-            component: (user) => <QualitiesList qualities={user.qualities} />
+            component: (user) => <Qualities qualities={user.qualities} />
         },
         professions: {
             name: "Профессия",

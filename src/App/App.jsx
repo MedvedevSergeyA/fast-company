@@ -21,17 +21,17 @@ const App = () => {
         <div>
             <AuthProvider>
                 <NavBar />
-                        <Switch>
-                            <ProtectedRoute
-                                path="/users/:userId?/:edit?"
-                                exact
-                                component={Users}
-                            />
-                            <Route path="/login/:type?" component={Login} />
-                            <Route path="/logout" component={LogOut}/>
-                            <Route path="/" exact component={Main} />
-                            <Redirect to="/" />
-                        </Switch>
+                    <Switch>
+                        <ProtectedRoute
+                            path="/users/:userId?/:edit?"
+                            exact
+                            component={Users}
+                        />
+                        <Route path="/login/:type?" component={Login} />
+                        <Route path="/logout" component={LogOut}/>
+                        <Route path="/" exact component={Main} />
+                        <Redirect to="/" />
+                    </Switch>
             </AuthProvider>
             <ToastContainer />
         </div>
