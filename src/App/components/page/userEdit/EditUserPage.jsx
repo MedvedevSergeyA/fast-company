@@ -6,16 +6,19 @@ import MultiSelectField from "../../common/form/multiSelectField";
 import { validator } from "../../../utils/validator";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
-import { useProfessions } from "../../../hooks/useProfession";
-import { useQualities } from "../../../hooks/useQualities";
+import { useSelector } from "react-redux";
+import { getQualities, getQualitiesLoadingStatus } from "../../../store/qualities";
+import { getProfession } from "../../../store/profession";
 
 const EditUserPage = () => {
-    const { currentUser } = useAuth();
-    const { upDateUser } = useAuth();
+    const { currentUser, upDateUser } = useAuth();
     const history = useHistory();
     const [data, setData] = useState(currentUser);
-    const { professions } = useProfessions();
-    const { qualities, isLoading } = useQualities();
+    const professions = useSelector(getProfession())
+    const qualities = useSelector(getQualities())
+    const qualitiesLoading = useSelector(getQualitiesLoadingStatus())
+
+
     const [errors, setErrors] = useState({});
 
     const professionsList = professions.map((prof) => ({
@@ -34,13 +37,13 @@ const EditUserPage = () => {
         return setQual;
     };
     useEffect(() => {
-        if (!isLoading) {
+        if (!qualitiesLoading) {
             setData((prev) => ({
                 ...prev,
                 qualities: transformData(currentUser.qualities)
             }));
         }
-    }, [isLoading]);
+    }, [qualitiesLoading]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

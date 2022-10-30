@@ -8,11 +8,13 @@ import UsersTable from "../../ui/UsersTable";
 import _ from "lodash";
 import Loader from "../../loader/loader";
 import { useUser } from "../../../hooks/useUsers";
-import { useProfessions } from "../../../hooks/useProfession";
 import { useAuth } from "../../../hooks/useAuth";
+import { useSelector } from "react-redux";
+import { getProfession, getProfessionLoadingStatus } from "../../../store/profession";
 
 const UsersListPage = () => {
-    const { isLoading: professionsLoading, professions } = useProfessions();
+    const professions = useSelector(getProfession())
+    const professionsLoading = useSelector(getProfessionLoadingStatus())
     const { currentUser } = useAuth();
     const pageSize = 8;
     const [currentPage, setCurrentPage] = useState(1);
