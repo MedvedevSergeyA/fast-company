@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/common/protectedRoute";
 import LogOut from "./layouts/logOut";
 import { useDispatch } from "react-redux";
 import { loadQualitiesList } from "./store/qualities";
+// import { ProfessionProvider } from "./hooks/useProfession";
 
 
 const App = () => {
